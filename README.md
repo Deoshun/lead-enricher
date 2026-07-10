@@ -100,7 +100,7 @@ Adjust the operational thresholds and lead directory path bindings:
 
 To automatically qualify your target `raw_leads`, the engine learns what a "good" or "bad" lead looks like using example training pools:
 
-1. **The Training Set:** Drop ~50 target examples of ideal leads into your `valid_examples` directory, and ~50 poor-fit examples into `invalid_examples`.
+1. **The Training Set:** Drop at least 50 target examples of ideal leads into your `valid_examples` directory, and at least 50 poor-fit examples into `invalid_examples`.
 2. **Mathematical Evaluation:** The system builds an analytical profiling grid based on the industry tags present in your training sets using a Weight of Evidence framework.
 3. **Filtering:** Raw targets with composite scores hitting above your custom `"threshold"` are cleared for deep scraping; poor fits are exported cleanly to an unqualified registry without hitting your network bandwidth.
 
