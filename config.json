@@ -1,0 +1,7 @@
+{
+	"interactive": "False",
+	"threshold": "0.6",
+	"example_qualified_leads_dir": "imports/leads/valid_examples",
+	"example_unqualified_leads_dir": "imports/leads/invalid_examples",
+	"raw_leads_dir": "imports/leads/raw_leads"
+}

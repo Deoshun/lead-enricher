@@ -1,0 +1,7 @@
+{
+	"company_name": "name",
+	"address": "address",
+	"types": "types",
+	"website": "website_uri",
+	"phone": "national_number"
+}

@@ -1,0 +1,19 @@
+# .gitignore
+# Environments and local systems
+venv/
+.env
+%TMP%/
+*.swp
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Data files (Crucial for data privacy / GDPR compliance)
+imports/leads/valid_examples/*
+imports/leads/invalid_examples/*
+imports/leads/raw_leads/*
+exports/*
+
+# System specific files
+.DS_Store

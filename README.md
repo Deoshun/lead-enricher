@@ -1,0 +1,144 @@
+Here is a clean, professional, and comprehensive `readme.md` designed for the open-source community. It clearly explains what your project does, how to configure it, and how to get it running safely.
+
+---
+
+```markdown
+# Lead Matcher & Enricher
+
+A modular Python tool designed to automate lead generation workflows. This project takes a raw list of potential leads (e.g., from Google Places), evaluates and filters them using a **Weight of Evidence (WoE)** qualification model, and automatically crawls the web to enrich qualified candidates with contact emails, phone numbers, and social media links.
+
+---
+
+## 🚀 Features
+
+*   **Smart Classification:** Uses a Laplace-smoothed Weight of Evidence (WoE) model to score and qualify leads based on industry or business types.
+*   **Automated Enrichment:** Deep-crawls company websites up to configurable depths to extract emails, global phone numbers, and social profiles.
+*   **Fallback Search Discovery:** Seamlessly uses search engine parsing to locate websites when a direct link isn't explicitly provided in the raw data.
+*   **Flexible Data Pipelines:** Ingests raw leads from `.csv`, `.xls`, or `.ods` sheets and exports clean, structured categorization sets.
+*   **Dual-mode UI:** Can run silently via backend configurations or interactively using a built-in step-by-step graphical folder picker.
+
+---
+
+## 📂 Project Architecture
+
+```text
+.
+├── column_name_config.json   # Maps your unique source sheet headers to standard fields
+├── config.json               # System behavioral thresholds and internal path rules
+├── requirements.txt          # Python dependencies
+├── src/
+│   ├── main.py               # Application entry point
+│   ├── data_exporter/        # Handles exporting clean structured datasets
+│   ├── enrich/               # Core scraping, search fallbacks, and regex parsers
+│   ├── lead/                 # Base object models and unified file importers
+│   └── qualify/              # WoE optimization engines and mathematical processing
+└── README.md
+
+```
+
+---
+
+## 🛠️ Installation & Setup
+
+1. **Clone the Repository**
+```bash
+git clone [https://github.com/yourusername/lead-enricher.git](https://github.com/yourusername/lead-enricher.git)
+cd lead-enricher
+
+```
+
+
+2. **Set Up a Virtual Environment**
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+
+```
+
+
+3. **Install Dependencies**
+```bash
+pip install -r requirements.txt
+
+```
+
+
+
+---
+
+## ⚙️ Configuration Guide
+
+### 1. Match Your File Headers (`column_name_config.json`)
+
+Different lead lists use different column titles. Map your incoming file headers to the fields expected by the application:
+
+```json
+{
+  "company_name": "your_sheet_name_column",
+  "address": "your_sheet_address_column",
+  "types": "your_sheet_industry_tags_column",
+  "website": "your_sheet_url_column",
+  "phone": "your_sheet_phone_column"
+}
+
+```
+
+### 2. Configure System Logic (`config.json`)
+
+Adjust the operational thresholds and lead directory path bindings:
+
+```json
+{
+  "interactive": "False",
+  "threshold": "0.6",
+  "raw_leads_dir": "imports/leads/raw_leads",
+  "example_qualified_leads_dir": "imports/leads/valid_examples",
+  "example_unqualified_leads_dir": "imports/leads/invalid_examples"
+}
+
+```
+
+*Set `"interactive": "True"` if you want a Tkinter folder pop-up GUI to manually select directories on run.*
+
+---
+
+## 📈 The Qualification Workflow (How it Works)
+
+To automatically qualify your target `raw_leads`, the engine learns what a "good" or "bad" lead looks like using example training pools:
+
+1. **The Training Set:** Drop ~50 target examples of ideal leads into your `valid_examples` directory, and ~50 poor-fit examples into `invalid_examples`.
+2. **Mathematical Evaluation:** The system builds an analytical profiling grid based on the industry tags present in your training sets using a Weight of Evidence framework.
+3. **Filtering:** Raw targets with composite scores hitting above your custom `"threshold"` are cleared for deep scraping; poor fits are exported cleanly to an unqualified registry without hitting your network bandwidth.
+
+---
+
+## 🖥️ Usage
+
+Run the primary automation pipeline straight from the terminal root:
+
+```bash
+python src/main.py
+
+```
+
+### 📤 Output Sets
+
+Once processing concludes, your generated matches will settle inside the `/exports` folder, sorted clean by contact availability:
+
+* `with_email_output.csv` — Verified leads with an extracted email.
+* `with_social_links_output.csv` — Leads missing direct emails but populated with verified social profiles.
+* `with_number_output.csv` — Leads containing only validated telephone points.
+* `unqualified_output.csv` — Raw targets that fell under your scoring qualification threshold.
+
+---
+
+## ⚖️ Legal & Compliance Disclaimer
+
+This codebase contains generic web-scraping utilities. When configuring depth settings or running lead generation campaigns across open domains:
+
+* Always verify that your operations comply with data privacy regulations like **GDPR**, **CCPA**, and local spam policies.
+* This tool includes built-in compliance checks designed to respect remote domain `robots.txt` access permissions and delay rates natively. Please use responsibly.
+
+```
+
+```
