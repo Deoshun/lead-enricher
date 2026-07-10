@@ -133,11 +133,13 @@ To evaluate if an incoming business type is a good match, this tool implements a
 ### The Formula
 For any given business type tag ($evidence$), the score is calculated as:
 
-$$\text{WoE} = \ln\left( \frac{\% \text{ of Total Good Leads containing this tag}}{\% \text{ of Total Bad Leads containing this tag}} \right)$$
+```text
+                       % of Total Good Leads containing this tag
+WoE = ln( ------------------------------------------------------------------- )
+                       % of Total Bad Leads containing this tag
+```
 
-Which translates programmatically in `src/qualify/woe.py` to:
-
-$$\text{WoE} = \ln\left( \frac{\text{tag\_count}_{\text{good}} \,/\, \text{total\_tags}_{\text{good}}}{\text{tag\_count}_{\text{bad}} \,/\, \text{total\_tags}_{\text{bad}}} \right)$$
+Which translates programmatically in `src/qualify/woe.py`.
 
 ### How to Interpret the Output:
 *   **Positive Score ($> 0$):** The tag appears at a higher rate in your valid examples than your invalid examples. This tag actively pulls the lead *towards* being qualified.
