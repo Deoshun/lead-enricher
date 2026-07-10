@@ -126,6 +126,35 @@ Once processing concludes, your generated matches will settle inside the `/expor
 
 ---
 
+## 🧮 Understanding the Qualification Engine (WoE Math)
+
+To evaluate if an incoming business type is a good match, this tool implements a **Weight of Evidence (WoE)** framework commonly used in statistical credit scoring and classification tasks. 
+
+### The Formula
+For any given business type tag ($evidence$), the score is calculated as:
+
+$$\text{WoE} = \ln\left( \frac{\% \text{ of Total Good Leads containing this tag}}{\% \text{ of Total Bad Leads containing this tag}} \right)$$
+
+Which translates programmatically in `src/qualify/woe.py` to:
+
+$$\text{WoE} = \ln\left( \frac{\text{tag\_count}_{\text{good}} \,/\, \text{total\_tags}_{\text{good}}}{\text{tag\_count}_{\text{bad}} \,/\, \text{total\_tags}_{\text{bad}}} \right)$$
+
+### How to Interpret the Output:
+*   **Positive Score ($> 0$):** The tag appears at a higher rate in your valid examples than your invalid examples. This tag actively pulls the lead *towards* being qualified.
+*   **Negative Score ($< 0$):** The tag appears more frequently in your invalid examples. It acts as negative weight, signaling a poor match.
+*   **Zero Score ($= 0$):** The tag is completely neutral or unseen, exerting no influence.
+
+### Real-World Implementation in This Code
+1.  **Calibration (`woe.py`):** When the application fires up, `BusinessTypeWOE` reads all categories inside your example folders. It applies **Laplace Smoothing** (initializing counts at `1` instead of `0`) to gracefully prevent math crashes like dividing by zero or taking the natural log ($\ln$) of zero.
+2.  **Scoring (`qualifier.py`):** For a raw lead, the system sums up the individual WoE weights for all its tags ($\sum \text{WoE}$).
+3.  **The Sigmoid Gate:** Because raw WoE sums can span anywhere from negative to positive infinity, the code passes the net weight through a **Sigmoid Activation Function**:
+
+$$\text{Score} = \frac{1}{1 + e^{-x}}$$
+
+This compresses the final outcome into a clean probability percentage between `0.0` and `1.0`. If that resulting percentage beats your configured threshold (e.g., `0.6`), the lead is passed forward for scraping!
+
+🎥 **Deep Dive:** For a comprehensive, intuitive visual breakdown of how Weight of Evidence (WoE) and Information Value (IV) work mathematically, check out this excellent video guide: [Weight of Evidence & Information Value Explained](https://www.youtube.com/watch?v=98Zzr6PU19U).
+
 ## ⚖️ Legal & Compliance Disclaimer
 
 This codebase contains generic web-scraping utilities. When configuring depth settings or running lead generation campaigns across open domains:
