@@ -1,13 +1,8 @@
-Here is a clean, professional, and comprehensive `readme.md` designed for the open-source community. It clearly explains what your project does, how to configure it, and how to get it running safely.
-
----
-
-```markdown
 # Lead Matcher & Enricher
 
 A modular Python tool designed to automate lead generation workflows. This project takes a raw list of potential leads (e.g., from Google Places), evaluates and filters them using a **Weight of Evidence (WoE)** qualification model, and automatically crawls the web to enrich qualified candidates with contact emails, phone numbers, and social media links.
 
----
+
 
 ## 🚀 Features
 
@@ -17,7 +12,7 @@ A modular Python tool designed to automate lead generation workflows. This proje
 *   **Flexible Data Pipelines:** Ingests raw leads from `.csv`, `.xls`, or `.ods` sheets and exports clean, structured categorization sets.
 *   **Dual-mode UI:** Can run silently via backend configurations or interactively using a built-in step-by-step graphical folder picker.
 
----
+
 
 ## 📂 Project Architecture
 
@@ -36,7 +31,6 @@ A modular Python tool designed to automate lead generation workflows. This proje
 
 ```
 
----
 
 ## 🛠️ Installation & Setup
 
