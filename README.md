@@ -36,7 +36,7 @@ A modular Python tool designed to automate lead generation workflows. This proje
 
 1. **Clone the Repository**
 ```bash
-git clone [https://github.com/yourusername/lead-enricher.git](https://github.com/yourusername/lead-enricher.git)
+git clone [https://github.com/Deoshun/lead-enricher.git](https://github.com/Deoshun/lead-enricher.git)
 cd lead-enricher
 
 ```
@@ -133,6 +133,3 @@ This codebase contains generic web-scraping utilities. When configuring depth se
 * Always verify that your operations comply with data privacy regulations like **GDPR**, **CCPA**, and local spam policies.
 * This tool includes built-in compliance checks designed to respect remote domain `robots.txt` access permissions and delay rates natively. Please use responsibly.
 
-```
-
-```
