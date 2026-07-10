@@ -1,6 +1,6 @@
 # Lead Qualifier & Enricher
 
-A modular Python tool designed to automate lead generation workflows. This project takes a raw list of potential leads (e.g., from Google Places), evaluates and filters them using a **Weight of Evidence (WoE)** qualification model, and automatically crawls the web to enrich qualified candidates with contact emails, phone numbers, and social media links.
+A modular Python tool designed to automate lead generation workflows. This project takes a raw list of potential leads (e.g., from Google Places [try free tool](https://github.com/Deoshun/simple-google-maps-leads-generator)), evaluates and filters them using a **Weight of Evidence (WoE)** qualification model, and automatically crawls the web to enrich qualified candidates with contact emails, phone numbers, and social media links.
 
 
 
