@@ -142,9 +142,9 @@ WoE = ln( ------------------------------------------------------------------- )
 Which translates programmatically in `src/qualify/woe.py`.
 
 ### Real-World Implementation in This Code
-1.  **Calibration (`woe.py`):** When the application fires up, `BusinessTypeWOE` reads all categories inside your example folders. It applies **Laplace Smoothing** (initializing counts at `1` instead of `0`) to gracefully prevent math crashes like dividing by zero or taking the natural log ($\ln$) of zero.
-2.  **Scoring (`qualifier.py`):** For a raw lead, the system sums up the individual WoE score for all its tags ($\sum \text{WoE}$).
-3.  **The Sigmoid Gate:** Because raw WoE sums can span anywhere from negative to positive infinity, the code passes the net weight through a **Sigmoid Activation Function**:
+1.  **Calibration (`woe.py`):** When the application fires up, `BusinessTypeWOE` reads all categories inside your example folders. And generates scores for each tag.
+2.  **Scoring (`qualifier.py`):** For a raw lead, the system sums up the individual WoE score for each of its tags ($\sum \text{WoE}$).
+3.  **The Sigmoid Gate:** Because raw WoE sums can span anywhere from negative to positive infinity, the code passes the sum of WOE scores into a **Sigmoid Activation Function**:
 
 $$\text{Score} = \frac{1}{1 + e^{-x}}$$
 
