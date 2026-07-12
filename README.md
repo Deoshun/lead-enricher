@@ -36,7 +36,7 @@ A modular Python tool designed to automate lead generation workflows. This proje
 
 1. **Clone the Repository**
 ```bash
-git clone [https://github.com/Deoshun/lead-enricher.git](https://github.com/Deoshun/lead-enricher.git)
+git clone https://github.com/Deoshun/lead-enricher.git
 cd lead-enricher
 
 ```
@@ -141,11 +141,6 @@ WoE = ln( ------------------------------------------------------------------- )
 
 Which translates programmatically in `src/qualify/woe.py`.
 
-### How to Interpret the Output:
-*   **Positive Score ($> 0$):** The tag appears at a higher rate in your valid examples than your invalid examples. This tag actively pulls the lead *towards* being qualified.
-*   **Negative Score ($< 0$):** The tag appears more frequently in your invalid examples. It acts as negative weight, signaling a poor match.
-*   **Zero Score ($= 0$):** The tag is completely neutral or unseen, exerting no influence.
-
 ### Real-World Implementation in This Code
 1.  **Calibration (`woe.py`):** When the application fires up, `BusinessTypeWOE` reads all categories inside your example folders. It applies **Laplace Smoothing** (initializing counts at `1` instead of `0`) to gracefully prevent math crashes like dividing by zero or taking the natural log ($\ln$) of zero.
 2.  **Scoring (`qualifier.py`):** For a raw lead, the system sums up the individual WoE score for all its tags ($\sum \text{WoE}$).
@@ -153,7 +148,7 @@ Which translates programmatically in `src/qualify/woe.py`.
 
 $$\text{Score} = \frac{1}{1 + e^{-x}}$$
 
-This compresses the final outcome into a clean probability percentage between `0.0` and `1.0`. If that resulting percentage beats your configured threshold (e.g., `0.6`), the lead is passed forward for scraping!
+This compresses the final outcome into a clean number between `0.0` and `1.0`. If that resulting number beats your configured threshold (e.g., `0.6`), the lead is passed forward for scraping!
 
 🎥 **Deep Dive:** For a comprehensive, intuitive visual breakdown of how Weight of Evidence (WoE) and Information Value (IV) work mathematically, check out this excellent video guide: [Weight of Evidence & Information Value Explained](https://www.youtube.com/watch?v=98Zzr6PU19U).
 
